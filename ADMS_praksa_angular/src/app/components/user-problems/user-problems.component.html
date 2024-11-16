@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+         <div class="col-lg-10 mx-auto mb-4">
+            <div class="section-title text-center ">
+                <h3 class="top-c-sep">
+                    Addresses that are being processed</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="career-search mb-60">
+
+                <form [formGroup] = "processForm" (ngSubmit) = "filter('PROCESSED')" action="#" class="career-form mb-60">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-4 my-1">
+                                <div class="input-group position-relative">
+                                    <input type="text" class="form-control" placeholder="Place" id="keywords1"  [formControlName] = "'place'">
+                                </div>
+                            </div>
+                            <div class="col-md-4 my-1">
+                                <div class="input-group position-relative">
+                                    <input type="text" class="form-control" placeholder="Street" id="keywords2"  [formControlName] = "'street'">
+                                </div>
+                            </div>
+                            <div class="col-md-4 my-1">
+                                <div class="input-group position-relative">
+                                    <input type="text" class="form-control" placeholder="Number" id="keywords3"  [formControlName] = "'number'">
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6 col-lg-3 my-3">
+                            <button type="submit" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+ 
+                <div class="filter-result">
+                   
+                    <div *ngFor="let problemUser of processedUserProblems"  class="job-box d-md-flex align-items-center justify-content-between mb-30">
+                        <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                            <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                                proc
+                            </div>
+                            <div class="job-content">
+                                <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                    <li class="mr-md-4">
+                                        <i class="zmdi zmdi-pin mr-2"></i> Place: {{problemUser.place}}
+                                    </li>
+                                    <li class="mr-md-4">
+                                        <i class="zmdi zmdi-money mr-2"></i>Street: {{problemUser.street}}
+                                    </li>
+                                    <li class="mr-md-4">
+                                        <i class="zmdi zmdi-time mr-2"></i>Number: {{problemUser.number}}
+                                    </li>
+                                    <li class="mr-md-4">
+                                        <i class="zmdi zmdi-time mr-2"></i>Workers in the field, predicted time when the problem will be completed: {{problemUser.predictedDate}} at {{problemUser.predictedTime}}
+                                    </li>
+                            
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
