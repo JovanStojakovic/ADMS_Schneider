@@ -6,6 +6,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { ProcessedProblemsComponent } from './components/processed-problems-page/processed-problems.component';
 import { SendForProcessingComponent } from './components/send-for-processing/send-for-processing.component';
 import { UpdateProcessingComponent } from './components/update-processing/update-processing.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: "userPage", component: UserPageComponent},
   {path: "problemProcessed", component: ProcessedProblemsComponent},
   {path: "sendForProcessing/:id", component: SendForProcessingComponent},
-  {path: "updateProcessing/:id", component: UpdateProcessingComponent}
+  {path: "updateProcessing/:id", component: UpdateProcessingComponent},
+  {path: "navbar", component: NavbarComponent}
 ];
 
 @NgModule({

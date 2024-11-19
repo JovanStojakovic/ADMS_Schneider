@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +52,10 @@ public class ProblemServiceImpl implements ProblemService {
     }
     @Override
     public ProblemDTO saveProblem(long id, ProblemDTO problemDTO) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         // Pronalazimo problem koji želimo da ažuriramo na osnovu prosleđenog id-ja
         Problem problem = problemRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Problem nije pronađen"));
@@ -76,6 +81,10 @@ public class ProblemServiceImpl implements ProblemService {
 
     @Override
     public List<ProblemDTO> getProbPending() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         // Dobijamo sve probleme sa statusom PENDING
         List<Problem> pendingProblems = problemRepository.findByStatus(Status.PENDING);
 
@@ -113,6 +122,10 @@ public class ProblemServiceImpl implements ProblemService {
     }
     @Override
     public List<ProblemDTO> getProbCompleted() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         // Dobijamo sve probleme sa statusom COMPLETED
         List<Problem> completedProblems = problemRepository.findByStatus(Status.COMPLETED);
 
@@ -125,6 +138,10 @@ public class ProblemServiceImpl implements ProblemService {
     }
     @Override
     public ProblemDTO getProblemById(long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         Problem problem = problemRepository.findById(id).orElseGet(null);
         ProblemDTO problemDTO = modelMapper.map(problem, ProblemDTO.class);
         return problemDTO;
@@ -132,6 +149,10 @@ public class ProblemServiceImpl implements ProblemService {
 
     @Override
     public ProblemProcessedDTO getProblemProcessedById(long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         ProblemProcessed problemProcessed = problemProcessedRepository.findById(id).orElseGet(null);
         ProblemProcessedDTO problemDTO = modelMapper.map(problemProcessed, ProblemProcessedDTO.class);
         return problemDTO;
@@ -141,6 +162,9 @@ public class ProblemServiceImpl implements ProblemService {
     @Override
     public void completeProblem(long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new UsernameNotFoundException("Korisnik nije ulogovan");
+        }
         String trenutnoUlogovanUsername = auth.getName();
         // Pronalazimo trenutno ulogovanog korisnika
         User trenutnoUlogovaniKorisnik = userRepository.findByUsername(trenutnoUlogovanUsername)

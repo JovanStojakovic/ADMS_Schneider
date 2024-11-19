@@ -15,6 +15,7 @@ import { SendForProcessingComponent } from './components/send-for-processing/sen
 import { UpdateProcessingComponent } from './components/update-processing/update-processing.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './shared/interceptor';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -30,7 +31,8 @@ import { JwtInterceptor } from './shared/interceptor';
     ProcessedProblemsComponent,
     ProcessedProblemComponent,
     SendForProcessingComponent,
-    UpdateProcessingComponent
+    UpdateProcessingComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
